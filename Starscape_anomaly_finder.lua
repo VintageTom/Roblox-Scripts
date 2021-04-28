@@ -1,5 +1,6 @@
 wait(5)
 
+-- You can use this in Auto execute, but beware that until now i've found no way to limit the script to starscape, because of the different places.
 -- Starscape Anomaly Finder.
 -- Only works in the system you are in, you still have to use probe to find the anomaly location.
 -- Use the minus key " - " to open and close the gui
