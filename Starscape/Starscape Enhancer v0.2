@@ -1,0 +1,253 @@
+-- Gui to Lua
+-- Version: 3.2
+--Anomaly Finder and playership list, use ' - ' key to toggle the gui.
+-- You still need to use probes to find the actual anomaly location. Although i am working on a way to make your life even easier ;)
+
+-- Instances:
+
+local StarGui = Instance.new("ScreenGui")
+local anamolies = Instance.new("Frame")
+local _1 = Instance.new("TextLabel")
+local _2 = Instance.new("TextLabel")
+local _3 = Instance.new("TextLabel")
+local _4 = Instance.new("TextLabel")
+local _5 = Instance.new("TextLabel")
+local _6 = Instance.new("TextLabel")
+local psList = Instance.new("Frame")
+local UIListLayout = Instance.new("UIListLayout")
+
+--Properties:
+
+StarGui.Name = "StarGui"
+StarGui.Parent = game.CoreGui
+StarGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+anamolies.Name = "anamolies"
+anamolies.Parent = StarGui
+anamolies.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+anamolies.BackgroundTransparency = 1.000
+anamolies.Position = UDim2.new(0.200000003, 0, 0, 0)
+anamolies.Size = UDim2.new(0, 302, 0, 100)
+
+_1.Name = "1"
+_1.Parent = anamolies
+_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_1.BackgroundTransparency = 1.000
+_1.Size = UDim2.new(0, 100, 0, 50)
+_1.Font = Enum.Font.SourceSans
+_1.Text = "-"
+_1.TextColor3 = Color3.fromRGB(85, 255, 127)
+_1.TextScaled = true
+_1.TextSize = 14.000
+_1.TextWrapped = true
+
+_2.Name = "2"
+_2.Parent = anamolies
+_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_2.BackgroundTransparency = 1.000
+_2.Position = UDim2.new(0, 0, 0.5, 0)
+_2.Size = UDim2.new(0, 100, 0, 50)
+_2.Font = Enum.Font.SourceSans
+_2.Text = "-"
+_2.TextColor3 = Color3.fromRGB(85, 255, 127)
+_2.TextScaled = true
+_2.TextSize = 14.000
+_2.TextWrapped = true
+
+_3.Name = "3"
+_3.Parent = anamolies
+_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_3.BackgroundTransparency = 1.000
+_3.Position = UDim2.new(0.333333313, 0, 0.5, 0)
+_3.Size = UDim2.new(0, 100, 0, 50)
+_3.Font = Enum.Font.SourceSans
+_3.Text = "-"
+_3.TextColor3 = Color3.fromRGB(85, 255, 127)
+_3.TextScaled = true
+_3.TextSize = 14.000
+_3.TextWrapped = true
+
+_4.Name = "4"
+_4.Parent = anamolies
+_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_4.BackgroundTransparency = 1.000
+_4.Position = UDim2.new(0.333333313, 0, 0, 0)
+_4.Size = UDim2.new(0, 100, 0, 50)
+_4.Font = Enum.Font.SourceSans
+_4.Text = "-"
+_4.TextColor3 = Color3.fromRGB(85, 255, 127)
+_4.TextScaled = true
+_4.TextSize = 14.000
+_4.TextWrapped = true
+
+_5.Name = "5"
+_5.Parent = anamolies
+_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_5.BackgroundTransparency = 1.000
+_5.Position = UDim2.new(0.666666627, 0, 0, 0)
+_5.Size = UDim2.new(0, 100, 0, 50)
+_5.Font = Enum.Font.SourceSans
+_5.Text = "-"
+_5.TextColor3 = Color3.fromRGB(85, 255, 127)
+_5.TextScaled = true
+_5.TextSize = 14.000
+_5.TextWrapped = true
+
+_6.Name = "6"
+_6.Parent = anamolies
+_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_6.BackgroundTransparency = 1.000
+_6.Position = UDim2.new(0.666666627, 0, 0.5, 0)
+_6.Size = UDim2.new(0, 100, 0, 50)
+_6.Font = Enum.Font.SourceSans
+_6.Text = "-"
+_6.TextColor3 = Color3.fromRGB(85, 255, 127)
+_6.TextScaled = true
+_6.TextSize = 14.000
+_6.TextWrapped = true
+
+psList.Name = "psList"
+psList.Parent = StarGui
+psList.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+psList.BackgroundTransparency = 1.000
+psList.Position = UDim2.new(0.745257437, 0, 0, 0)
+psList.Size = UDim2.new(0, 250, 0, 300)
+
+UIListLayout.Parent = psList
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
+
+-- Scripts:
+
+local function YHMVI_fake_script() -- anamolies.anomFinder 
+	local script = Instance.new('LocalScript', anamolies)
+
+	local aFolder = game:GetService("Workspace").Objects.Anomalies -- a stands for Anomalies
+	local Anomalies = aFolder:GetChildren()
+	local frame = script.Parent
+	
+	for i = 1, #Anomalies do
+		
+		local anom = Anomalies[i]
+		print(anom.Name)
+		frame[i].Text = anom.Name
+		if i>6 then
+			return
+		end
+	
+	end
+	
+end
+coroutine.wrap(YHMVI_fake_script)()
+local function IDVLIU_fake_script() -- anamolies.togglescript 
+	local script = Instance.new('LocalScript', anamolies)
+
+	
+	local frame = script.Parent
+	local UserInputService = game:GetService("UserInputService")
+	
+	UserInputService.InputBegan:Connect(function(input)
+		if input.KeyCode == Enum.KeyCode.Minus then
+			if frame.Visible == false then
+				frame.Visible = true
+			else
+				frame.Visible = false
+			end
+		end
+	end)
+	
+	
+end
+coroutine.wrap(IDVLIU_fake_script)()
+local function IVPG_fake_script() -- psList.LocalScript 
+	local script = Instance.new('LocalScript', psList)
+
+	wait(5)
+	
+	local sFolder = game:GetService("Workspace").Ships
+	local ships = sFolder:GetChildren()
+	
+	
+	local function labelDesign(thePlayer,theShip)
+		--Create TextLabel code
+		local label = Instance.new("TextLabel")
+		label.Name = thePlayer
+		label.RichText = true
+		label.Parent = script.Parent
+		label.Size = UDim2.new(0,250,0,20)
+		label.Text = string.format("<font color =\"rgb(255,51,51)\">%s</font> - <font color=\"rgb(64,255,25)\">%s</font>",thePlayer, theShip)
+		label.BackgroundTransparency = 1
+		label.TextSize = 12
+		label.TextXAlignment = Enum.TextXAlignment.Right
+	end
+	local function labelRemove(plrName)
+		--local plr = game:GetService('Players').LocalPlayer --for local testing only
+		game.CoreGui.StarGui.psList[plrName]:Destroy()
+		--plr.PlayerGui.StarGui.psList[plrName]:Destroy() -- for local testing only
+	end
+	
+	local function createShipList()
+		for i,v in pairs(ships) do
+	
+			--print(i,v)
+			local ship = v:GetChildren()
+			if ship[1] then
+	
+				labelDesign(v.Name,ship[1].Name)
+				--Check for errors
+				print(v.Name,ship[1].Name)
+	
+			end
+		end
+		wait(3)	
+	end
+	
+	createShipList()
+	-- Update the ship list every x seconds
+	local bool = true
+	workspace.Ships.DescendantAdded:Connect(function()
+		if bool then
+			--Checks for all player ship folder
+			for i,v in pairs(ships) do
+	
+				workspace.Ships[v.Name].ChildAdded:Connect(function(npShip)-- new player Ship
+					labelDesign(v.Name,npShip.Name)
+					bool = false
+				end)
+				workspace.Ships[v.Name].ChildRemoved:Connect(function(rmShip)--removed Ship
+	
+					print('removed')
+					labelRemove(v.Name)			
+					bool = false
+				end)
+			end
+		end
+		bool = true
+	end)
+	
+	
+	
+	
+	
+	
+end
+coroutine.wrap(IVPG_fake_script)()
+local function OYFQ_fake_script() -- psList.togglescript 
+	local script = Instance.new('LocalScript', psList)
+
+	
+	local frame = script.Parent
+	local UserInputService = game:GetService("UserInputService")
+	
+	UserInputService.InputBegan:Connect(function(input)
+		if input.KeyCode == Enum.KeyCode.Minus then
+			if frame.Visible == false then
+				frame.Visible = true
+			else
+				frame.Visible = false
+			end
+		end
+	end)
+	
+	
+end
+coroutine.wrap(OYFQ_fake_script)()
