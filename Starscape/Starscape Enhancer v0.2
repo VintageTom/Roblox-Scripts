@@ -206,30 +206,37 @@ local function IVPG_fake_script() -- psList.LocalScript
 	
 	createShipList()
 	-- Update the ship list every x seconds
+	local sFolder = game:GetService("Workspace").Ships
+	local Players = game:GetService("Players")
 	local bool = true
-	workspace.Ships.DescendantAdded:Connect(function()
+	sFolder.DescendantAdded:Connect(function()
 		if bool then
 			--Checks for all player ship folder
 			for i,v in pairs(ships) do
 	
-				workspace.Ships[v.Name].ChildAdded:Connect(function(npShip)-- new player Ship
+				sFolder[v.Name].ChildAdded:Connect(function(npShip)-- new player Ship
 					labelDesign(v.Name,npShip.Name)
 					bool = false
 				end)
-				workspace.Ships[v.Name].ChildRemoved:Connect(function(rmShip)--removed Ship
+				sFolder[v.Name].ChildRemoved:Connect(function(rmShip)--removed Ship
 	
 					print('removed')
-					labelRemove(rmShip.Parent.Name)			
+					if rmShip.Parent then
+						labelRemove(rmShip.Parent.Name)	
+					else
+					end
+				
 					bool = false
 				end)
 			end
 		end
 		bool = true
 	end)
-	
-	
-	
-	
+	Players.PlayerRemoving:Connect(function(player)
+		if sFolder[player.Name] then
+			labelRemove(player.Name)
+		end
+	end)
 	
 	
 end
