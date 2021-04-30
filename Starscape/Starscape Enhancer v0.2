@@ -2,7 +2,7 @@
 -- Version: 3.2
 --Anomaly Finder and playership list, use ' - ' key to toggle the gui.
 -- You still need to use probes to find the actual anomaly location. Although i am working on a way to make your life even easier ;)
-wait(4)
+wait(6)
 -- Instances:
 
 local StarGui = Instance.new("ScreenGui")
@@ -124,6 +124,9 @@ local function YHMVI_fake_script() -- anamolies.anomFinder
 	local aFolder = game:GetService("Workspace").Objects.Anomalies -- a stands for Anomalies
 	local Anomalies = aFolder:GetChildren()
 	local frame = script.Parent
+	if aFolder == nil then
+		return
+	end
 	
 	for i = 1, #Anomalies do
 		
@@ -161,7 +164,7 @@ coroutine.wrap(IDVLIU_fake_script)()
 local function IVPG_fake_script() -- psList.LocalScript 
 	local script = Instance.new('LocalScript', psList)
 
-	wait(5)
+	--wait(5)
 	
 	local sFolder = game:GetService("Workspace").Ships
 	local ships = sFolder:GetChildren()
@@ -198,7 +201,7 @@ local function IVPG_fake_script() -- psList.LocalScript
 	
 			end
 		end
-		wait(3)	
+		
 	end
 	
 	createShipList()
