@@ -1,8 +1,6 @@
--- Gui to Lua
--- Version: 3.2
---Anomaly Finder and playership list, use ' - ' key to toggle the gui.
--- You still need to use probes to find the actual anomaly location. Although i am working on a way to make your life even easier ;)
-wait(6)
+-- Starscape Enhancer v0.2 
+-- Finds anomalies and keeps track of all ships in the server. You still need to use a probe to find the location of anomalies
+
 -- Instances:
 
 local StarGui = Instance.new("ScreenGui")
@@ -19,7 +17,7 @@ local UIListLayout = Instance.new("UIListLayout")
 --Properties:
 
 StarGui.Name = "StarGui"
-StarGui.Parent = game.CoreGui
+StarGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 StarGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 anamolies.Name = "anamolies"
@@ -118,27 +116,33 @@ UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
 
 -- Scripts:
 
-local function YHMVI_fake_script() -- anamolies.anomFinder 
+local function UEDFE_fake_script() -- anamolies.anomFinder 
 	local script = Instance.new('LocalScript', anamolies)
+
+	wait(3)
 	
-	local aFolder = game:GetService("Workspace").Objects.Anomalies -- a stands for Anomalies
-	local Anomalies = aFolder:GetChildren()
 	local frame = script.Parent
+	local aFolder = game:GetService("Workspace"):FindFirstChild('Objects')
+	local Anomalies = aFolder:GetChildren()
 	if aFolder then
-		for i = 1, #Anomalies do
-
-			local anom = Anomalies[i]
-			print(anom.Name)
-			frame[i].Text = anom.Name
-			if i>6 then
-				return
+		if Anomalies then
+			for i = 1, #Anomalies do
+	
+				local anom = Anomalies[i]
+				print(anom.Name)
+				frame[i].Text = anom.Name
+				if i>6 then
+					return
+				end
+	
 			end
-
 		end
 	end
+	
+	
 end
-coroutine.wrap(YHMVI_fake_script)()
-local function IDVLIU_fake_script() -- anamolies.togglescript 
+coroutine.wrap(UEDFE_fake_script)()
+local function JMGE_fake_script() -- anamolies.togglescript 
 	local script = Instance.new('LocalScript', anamolies)
 
 	
@@ -157,15 +161,14 @@ local function IDVLIU_fake_script() -- anamolies.togglescript
 	
 	
 end
-coroutine.wrap(IDVLIU_fake_script)()
-local function IVPG_fake_script() -- psList.LocalScript 
+coroutine.wrap(JMGE_fake_script)()
+local function YXZOES_fake_script() -- psList.listGenerator 
 	local script = Instance.new('LocalScript', psList)
 
-	--wait(5)
+	wait(5)
 	
 	local sFolder = game:GetService("Workspace").Ships
 	local ships = sFolder:GetChildren()
-	
 	
 	local function labelDesign(thePlayer,theShip)
 		--Create TextLabel code
@@ -180,9 +183,9 @@ local function IVPG_fake_script() -- psList.LocalScript
 		label.TextXAlignment = Enum.TextXAlignment.Right
 	end
 	local function labelRemove(plrName)
-		--local plr = game:GetService('Players').LocalPlayer --for local testing only
-		game.CoreGui.StarGui.psList[plrName]:Destroy()
-		--plr.PlayerGui.StarGui.psList[plrName]:Destroy() -- for local testing only
+		local plr = game:GetService('Players').LocalPlayer --for local testing only
+		--game.CoreGui.StarGui.psList[plrName]:Destroy()
+		plr.PlayerGui.StarGui.psList[plrName]:Destroy() -- for local testing only
 	end
 	
 	local function createShipList()
@@ -193,52 +196,47 @@ local function IVPG_fake_script() -- psList.LocalScript
 			if ship[1] then
 	
 				labelDesign(v.Name,ship[1].Name)
-				--Check for errors
-				print(v.Name,ship[1].Name)
 	
 			end
 		end
-		
+		wait(3)	
 	end
 	
 	createShipList()
-	-- Update the ship list every x seconds
-	local sFolder = game:GetService("Workspace").Ships
-	local Players = game:GetService("Players")
+	
+	workspace.Ships.DescendantRemoving:Connect(function(part)
+	
+		if part.Parent.Parent.Name == 'Ships' then -- checks if part is the ship
+			labelRemove(part.Parent.Name)
+		elseif part.Parent.Name == 'Ships' then
+			--labelRemove(part.Name) <--- why is this not needed? 
+			--Once i delete the player folder in ships folder the corresponding label is deleted too
+		end
+		
+	end)
+	
 	local bool = true
-	sFolder.DescendantAdded:Connect(function()
+	workspace.Ships.DescendantAdded:Connect(function(nPart)
 		if bool then
-			--Checks for all player ship folder
-			for i,v in pairs(ships) do
-	
-				sFolder[v.Name].ChildAdded:Connect(function(npShip)-- new player Ship
-					labelDesign(v.Name,npShip.Name)
-					bool = false
-				end)
-				sFolder[v.Name].ChildRemoved:Connect(function(rmShip)--removed Ship
-	
-					print('removed')
-					if rmShip.Parent then
-						labelRemove(rmShip.Parent.Name)	
-					else
-					end
-				
-					bool = false
-				end)
+			
+			if nPart.Parent.Parent.Name == "Ships" then
+				labelDesign(nPart.Parent.Name, nPart.Name)
 			end
+			
 		end
 		bool = true
 	end)
-	Players.PlayerRemoving:Connect(function(player)
-		if sFolder[player.Name] then
-			labelRemove(player.Name)
-		end
-	end)
+	
+	
+	
+	
+	
+	
 	
 	
 end
-coroutine.wrap(IVPG_fake_script)()
-local function OYFQ_fake_script() -- psList.togglescript 
+coroutine.wrap(YXZOES_fake_script)()
+local function FPTGN_fake_script() -- psList.togglescript 
 	local script = Instance.new('LocalScript', psList)
 
 	
@@ -257,4 +255,4 @@ local function OYFQ_fake_script() -- psList.togglescript
 	
 	
 end
-coroutine.wrap(OYFQ_fake_script)()
+coroutine.wrap(FPTGN_fake_script)()
