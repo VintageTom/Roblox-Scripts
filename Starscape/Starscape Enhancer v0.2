@@ -124,21 +124,19 @@ local function YHMVI_fake_script() -- anamolies.anomFinder
 	local aFolder = game:GetService("Workspace").Objects.Anomalies -- a stands for Anomalies
 	local Anomalies = aFolder:GetChildren()
 	local frame = script.Parent
-	if aFolder == nil then
-		return
-	end
-	
-	for i = 1, #Anomalies do
-		
-		local anom = Anomalies[i]
-		print(anom.Name)
-		frame[i].Text = anom.Name
-		if i>6 then
-			return
+	if not aFolder then
+	else
+		for i = 1, #Anomalies do
+
+			local anom = Anomalies[i]
+			print(anom.Name)
+			frame[i].Text = anom.Name
+			if i>6 then
+				return
+			end
+
 		end
-	
 	end
-	
 end
 coroutine.wrap(YHMVI_fake_script)()
 local function IDVLIU_fake_script() -- anamolies.togglescript 
