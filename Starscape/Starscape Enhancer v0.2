@@ -124,8 +124,7 @@ local function YHMVI_fake_script() -- anamolies.anomFinder
 	local aFolder = game:GetService("Workspace").Objects.Anomalies -- a stands for Anomalies
 	local Anomalies = aFolder:GetChildren()
 	local frame = script.Parent
-	if not aFolder then
-	else
+	if aFolder then
 		for i = 1, #Anomalies do
 
 			local anom = Anomalies[i]
