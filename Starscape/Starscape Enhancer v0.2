@@ -2,7 +2,7 @@
 -- Version: 3.2
 --Anomaly Finder and playership list, use ' - ' key to toggle the gui.
 -- You still need to use probes to find the actual anomaly location. Although i am working on a way to make your life even easier ;)
-
+wait(4)
 -- Instances:
 
 local StarGui = Instance.new("ScreenGui")
@@ -120,7 +120,7 @@ UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
 
 local function YHMVI_fake_script() -- anamolies.anomFinder 
 	local script = Instance.new('LocalScript', anamolies)
-
+	
 	local aFolder = game:GetService("Workspace").Objects.Anomalies -- a stands for Anomalies
 	local Anomalies = aFolder:GetChildren()
 	local frame = script.Parent
