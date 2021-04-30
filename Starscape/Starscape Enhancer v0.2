@@ -219,7 +219,7 @@ local function IVPG_fake_script() -- psList.LocalScript
 				workspace.Ships[v.Name].ChildRemoved:Connect(function(rmShip)--removed Ship
 	
 					print('removed')
-					labelRemove(v.Name)			
+					labelRemove(rmShip.Parent.Name)			
 					bool = false
 				end)
 			end
