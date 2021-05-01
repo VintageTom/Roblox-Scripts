@@ -183,9 +183,9 @@ local function YXZOES_fake_script() -- psList.listGenerator
 		label.TextXAlignment = Enum.TextXAlignment.Right
 	end
 	local function labelRemove(plrName)
-		local plr = game:GetService('Players').LocalPlayer --for local testing only
-		--game.CoreGui.StarGui.psList[plrName]:Destroy()
-		plr.PlayerGui.StarGui.psList[plrName]:Destroy() -- for local testing only
+		--local plr = game:GetService('Players').LocalPlayer --for local testing only
+		game.CoreGui.StarGui.psList[plrName]:Destroy()
+		--plr.PlayerGui.StarGui.psList[plrName]:Destroy() -- for local testing only
 	end
 	
 	local function createShipList()
