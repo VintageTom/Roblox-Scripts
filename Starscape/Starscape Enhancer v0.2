@@ -123,7 +123,7 @@ local function UEDFE_fake_script() -- anamolies.anomFinder
 	
 	local frame = script.Parent
 	local aFolder = game:GetService("Workspace"):FindFirstChild('Objects')
-	local Anomalies = aFolder:GetChildren()
+	local Anomalies = aFolder.Anomalies:GetChildren()
 	if aFolder then
 		if Anomalies then
 			for i = 1, #Anomalies do
