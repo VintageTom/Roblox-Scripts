@@ -2,7 +2,7 @@
 -- Finds anomalies and keeps track of all ships in the server. You still need to use a probe to find the location of anomalies
 
 -- Instances:
-
+wait(5)
 local StarGui = Instance.new("ScreenGui")
 local anamolies = Instance.new("Frame")
 local _1 = Instance.new("TextLabel")
@@ -17,7 +17,7 @@ local UIListLayout = Instance.new("UIListLayout")
 --Properties:
 
 StarGui.Name = "StarGui"
-StarGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+StarGui.Parent = game.CoreGui
 StarGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 anamolies.Name = "anamolies"
@@ -119,7 +119,7 @@ UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
 local function UEDFE_fake_script() -- anamolies.anomFinder 
 	local script = Instance.new('LocalScript', anamolies)
 
-	wait(3)
+	--wait(3)
 	
 	local frame = script.Parent
 	local aFolder = game:GetService("Workspace"):FindFirstChild('Objects')
@@ -165,7 +165,7 @@ coroutine.wrap(JMGE_fake_script)()
 local function YXZOES_fake_script() -- psList.listGenerator 
 	local script = Instance.new('LocalScript', psList)
 
-	wait(5)
+	--wait(5)
 	
 	local sFolder = game:GetService("Workspace").Ships
 	local ships = sFolder:GetChildren()
